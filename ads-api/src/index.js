@@ -8,10 +8,6 @@ const { insertAd, getAds, deleteAd, updateAd, } = require("./database/ads");
 
 const app = express();
 
-const database = [
-    {title: 'Hello, world (again)!'}
-]
-
 app.use(helmet());
 app.use(bodyParser.json());
 app.use(cors());
@@ -32,9 +28,9 @@ app.delete('/:id', async (req, res) => {
     res.send({ message: "Ad removed." })
 });
 
-app.post('/:id', async (req, res) => {
-    const updateAd = req.body;
-    await updateAd(req.params.id, updateAd);
+app.put('/:id', async (req, res) => {
+    const ad = req.body;
+    await updateAd(req.params.id, ad);
     res.send({ message: "Ad updated." });
 });
 
